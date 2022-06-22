@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Jungle Universe</h1>
+        <div class="shop-container">
+            <div class="shop-container_item" v-for="plant in plants" @click="plant.active = !plant.active" :class="{ selected : plant.active }">
+                <img :src="plant.photo" class="shop-container_image" alt="plante">
+                <h2 class="shop-container_itemTitle">{{ plant.name }}</h2>
+                <p class="shop-container_itemPrice">{{ plant.price }} €</p>
+                <template v-if="plant.active">
+                    <button type="button" @click.stop=" plant.quantity--" :disabled="plant.quantity<=1">-</button><div  class="shop-container_itemQuantity">{{ plant.quantity }} </div><button type="button" @click.stop="plant.quantity++">+</button>
+                </template>  
+            </div>
+        </div>
+        <template v-if="total()>0">
+            <div class="shop-results">
+                <h2>Panier</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plante</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="plant in plants">
+                            <template v-if="plant.active">
+                                <td>{{ plant.name }}</td>
+                                <td>{{ plant.quantity }}</td>
+                                <td>{{ plant.price }}</td>
+
+                            </template>   
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th>{{ totalQuantity() }}</th>
+                            <th>{{ total().toFixed(2) }} €</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+       
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="script.js"></script>
+</body>
+</html>
