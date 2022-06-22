@@ -1,7 +1,4 @@
 # Little plant's shop | an Udemy course
- 
- 
-# Mastering VUE JS | UDEMY 
 
 ## The micro project : "Little plant's shop"
 introduction project to the Vue JS tool 
